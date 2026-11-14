@@ -1,0 +1,11 @@
+# LOG
+- 2026-11-14 : Phase 0 (partielle) : fichier Lean et historique lus ; erdosproblems.com bloqué. Alerte : question 2 déjà réglée pour r >= 6, Lean déjà corrigé.
+- 2026-11-14 (soir) : réseau ouvert. Page 939, fil complet, pages 940/941/364 lus (notes/phase0.md, copies dans notes/raw/). conjectures.io toujours bloqué.
+- 2026-11-14 : code de recherche réécrit et testé (search/rpow.py, search_r5.py, test_search.py : générateur et recherche identiques à la force brute sur de petites bornes). r = 5 exhaustif jusqu'à 1e14 : 2 solutions (65 s). Lancement de 1e16.
+- 2026-11-14 : protocole H appliqué aux solutions connues (results/verification_known.txt). Une seule méthode de factorisation (division par essais) : ni PARI ni sympy dans la session.
+- 2026-11-14 (soir, local, macOS) : reprise depuis l'archive. Tests rejoués (test_search.py), r = 5 jusqu'à 1e14 rejoué : 2 solutions. Reconstruction des paires de search_r5.py vectorisée (numpy) ; retestée contre la force brute.
+- 2026-11-14 (soir, local) : **r = 5 exhaustif jusqu'à e <= 1e16 : 2 solutions, les deux connues** (1513 s). Comble le cas laissé ouvert par Cambie (pgcd deux à deux tous > 1) jusqu'à cette borne.
+- 2026-11-14 (soir, local) : search_r4.py parallélisé (une tranche de a par processus), testé contre la force brute (test_search_r4.py) et contre r = 3 jusqu'à 1e10 (Nitaj) et r = 4 jusqu'à 1e14 (aucune solution).
+- 2026-11-14 (soir, local) : verify.py relancé avec sympy : factorisations concordantes avec la division par essais, facteurs premiers certifiés. Toujours pas de PARI/GP.
+- 2026-11-14 (soir, local) : conjectures.io lu (notes/raw/conjectures_io_939.html) : preuve Lean approuvée le 06/08/2026 puis retirée, l'énoncé formel d'alors étant défectueux (positivité omise). Rien de nouveau sur le problème.
+- 2026-11-14 (soir, local) : **r = 4, a + b = c, pgcd 1, exhaustif jusqu'à c <= 9e18 : aucune solution** (N = 436945, 1570 s). Une seule exécution.

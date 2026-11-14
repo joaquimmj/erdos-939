@@ -1,0 +1,1 @@
+r=4 X=9000000000000000000 N=436945 coprime solutions (including a=1): 0; with a>1: 0; time=1570s
