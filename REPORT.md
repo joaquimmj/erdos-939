@@ -18,8 +18,11 @@ vérifications et des recherches exhaustives bornées.
 |---|---|---|---|---|
 | r = 5, a+b+c = e, pgcd(a,b,c) = 1, sans hypothèse deux à deux | e <= 1e14 | 2 solutions (Kitamura, Cambie) | calcul exact, rejoué en local | results/r5_1e14.txt |
 | idem | e <= 1e16 | **2 solutions, les deux déjà connues** (N = 16266 nombres 5-puissants, 124315057 sommes de paires, 1513 s) | calcul exact, une seule exécution | results/r5_1e16.txt |
+| idem, second algorithme indépendant (search_r5_seg.py) | e <= 1e16 | 2 solutions, les mêmes : le résultat à 1e16 est confirmé par deux méthodes | calcul exact, deux exécutions indépendantes | results/r5_1e16_seg.txt |
+| idem, second algorithme | **e <= 9e18** | **2 solutions, les deux déjà connues** (N = 72736 nombres 5-puissants, 172 segments, 2744 s sur 5 processus) | calcul exact, une seule exécution à cette borne | results/r5_9e18.txt |
 | r = 4, a+b = c, pgcd(a,b) = 1 | c <= 1e14 | aucune solution (même avec a = 1) | calcul exact | results/r4_1e14.txt |
-| idem | c <= 9e18 | **aucune solution, même avec a = 1** (N = 436945 nombres 4-puissants, 1570 s sur 8 processus) | calcul exact, une seule exécution | results/r4_9e18.txt |
+| idem | c <= 9e18 | **aucune solution, même avec a = 1** (N = 436945 nombres 4-puissants, 1570 s sur 8 processus) | calcul exact, confirmé (ligne suivante) | results/r4_9e18.txt |
+| idem, second chemin de calcul (search_r4_alt.py) | c <= 9e18 | aucune solution : résultat confirmé | calcul exact, deux exécutions indépendantes | results/r4_9e18_alt.txt |
 | r = 3 (contrôle) | c <= 1e10 | 1 solution (Nitaj) | calcul exact | results/r3_1e10.txt |
 
 Portée : « exhaustif » veut dire que tous les nombres r-puissants <= borne sont énumérés (générateur comparé à la
@@ -31,10 +34,14 @@ results/verification_known.txt : somme exacte, factorisations par division par e
 (concordantes), primalité des facteurs prouvée par sympy et par PARI (isprime), pgcd global 1.
 
 ## O3 (infinité pour r = 5)
-Rien de prouvé. notes/o3_r5.md : pourquoi l'identité de Price s'arrête à r = 6, une tentative de regroupement
+Rien de prouvé sur la question elle-même. Résultats négatifs partiels sur les identités polynomiales « à la Price » à quatre
+termes : notes/o3_identities.md. Au plus un terme peut être un monôme (preuve à la main) ; le cas « un monôme et trois termes à une
+racine » est exclu par un calcul exact (33963 bases de Gröbner) ; aucune identité sur 138 configurations de racines testées.
+Restent ouverts dans ce cadre : un monôme avec au moins quatre facteurs non libres, et quatre termes non monomiaux. notes/o3_r5.md : pourquoi l'identité de Price s'arrête à r = 6, une tentative de regroupement
 (impasse), pistes non explorées.
 
 ## Non fait
 - Recentrage des objectifs sur r = 5 : pas encore validé par Joaquim.
 - `sorry` Lean (`infinite_of_six_le`, `seven`, `eight`) : non abordés.
-- Aucune seconde exécution indépendante des recherches à 1e16 et 9e18.
+- Aucune seconde exécution indépendante de la recherche r = 5 à 9e18. Celles de r = 5 à 1e16 et de r = 4 à 9e18 sont confirmées par deux méthodes.
+  Les deux méthodes partagent toutefois le même générateur de nombres r-puissants (rpow.py, testé contre la factorisation naïve).

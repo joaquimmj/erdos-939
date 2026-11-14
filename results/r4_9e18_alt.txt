@@ -1,0 +1,1 @@
+r=4 X=9000000000000000000 (alt) coprime solutions (including a=1): 0; time=509s

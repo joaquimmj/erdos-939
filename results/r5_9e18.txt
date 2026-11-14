@@ -1,0 +1,21 @@
+N=72736, segments=172
+segments 10/172 224s sols=2
+segments 20/172 434s sols=2
+segments 30/172 633s sols=2
+segments 40/172 788s sols=2
+segments 50/172 962s sols=2
+segments 60/172 1111s sols=2
+segments 70/172 1262s sols=2
+segments 80/172 1412s sols=2
+segments 90/172 1528s sols=2
+segments 100/172 1641s sols=2
+segments 110/172 1754s sols=2
+segments 120/172 1852s sols=2
+segments 130/172 1948s sols=2
+segments 140/172 2049s sols=2
+segments 150/172 2148s sols=2
+segments 160/172 2301s sols=2
+segments 170/172 2433s sols=2
+r=5 X=9000000000000000000 N=72736 solutions=2 time=2744s
+772402208 1977326743 134481277728 137231006679
+59797108943 606355001344 1180980000000 1847132110287
