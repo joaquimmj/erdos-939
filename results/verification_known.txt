@@ -1,7 +1,7 @@
 r=5 [Kitamura (fil, 25/05/2026)]: 2^5 * 17^6 + 7^11 + 2^5 * 3^6 * 7^8 = 3^7 * 13^7
-    sum_exact=True, n_terms=True, positive_gt1=True, distinct=True, factor_crosscheck=True, primes_certified=True, r_powerful=True, joint_gcd_1=True, pairwise_coprime=False, has_perfect_rth_power=False
+    sum_exact=True, n_terms=True, positive_gt1=True, distinct=True, factor_crosscheck=True, pari_crosscheck=True, primes_certified=True, r_powerful=True, joint_gcd_1=True, pairwise_coprime=False, has_perfect_rth_power=False
 r=5 [Cambie (page)]: 2^8 * 3^10 * 5^7 + 2^12 * 23^6 + 11^5 * 13^5 = 3^7 * 61^5
-    sum_exact=True, n_terms=True, positive_gt1=True, distinct=True, factor_crosscheck=True, primes_certified=True, r_powerful=True, joint_gcd_1=True, pairwise_coprime=False, has_perfect_rth_power=True
+    sum_exact=True, n_terms=True, positive_gt1=True, distinct=True, factor_crosscheck=True, pari_crosscheck=True, primes_certified=True, r_powerful=True, joint_gcd_1=True, pairwise_coprime=False, has_perfect_rth_power=True
 r=6 [dossier A.2, plus petit exemple r = 6]: 2^7 + 2^9 + 5^6 + 7^7 = 2^7 * 3^8
-    sum_exact=True, n_terms=True, positive_gt1=True, distinct=True, factor_crosscheck=True, primes_certified=True, r_powerful=True, joint_gcd_1=True, pairwise_coprime=False, has_perfect_rth_power=True
+    sum_exact=True, n_terms=True, positive_gt1=True, distinct=True, factor_crosscheck=True, pari_crosscheck=True, primes_certified=True, r_powerful=True, joint_gcd_1=True, pairwise_coprime=False, has_perfect_rth_power=True
 r=6 [famille de Price, r = 6, B = 30, q = 31]: sum exact True; termes = (q^6-B^6)^6, 12 X^5 Y, 40 X^3 Y^3, 12 X Y^5, total (X+Y)^6; gcd joint 1; primes of 12 and 40 divide B=30: True

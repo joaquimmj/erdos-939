@@ -1,5 +1,5 @@
 """Protocol H: independent verification of a solution a_1+...+a_m = e (r-powerful, joint gcd 1).
-Factorisation by trial division + sympy.factorint cross-check; primality of each factor by sympy.isprime
+Factorisation by trial division, cross-checked by sympy.factorint and by PARI/GP (if installed); primality of each factor by sympy.isprime
 (deterministic below 3.3e24)."""
 import sys
 from math import gcd
@@ -9,6 +9,16 @@ try:
     from sympy import factorint, isprime
 except ImportError:
     factorint = isprime = None
+def pari(ns):
+    """second independent factorisation (PARI/GP): {p: e} per n, primes proven by isprime; None if gp is absent"""
+    import re, shutil, subprocess
+    if not shutil.which('gp'): return None
+    src = ''.join(f'f=factor({n});print(concat(vector(#f~,i,[f[i,1],f[i,2],isprime(f[i,1])])))\n' for n in ns)
+    out = []
+    for line in subprocess.run(['gp', '-q'], input=src, capture_output=True, text=True, check=True).stdout.splitlines():
+        v = list(map(int, re.findall(r'\d+', line))); assert all(v[2::3]), 'PARI: non-prime factor'
+        out.append(dict(zip(v[0::3], v[1::3])))
+    return out
 def trial(n):
     f = {}; p = 2
     while p*p <= n:
@@ -25,6 +35,8 @@ def verify(r, terms, total, nterms=None):
     out['distinct'] = len(set(terms)) == len(terms)
     facs = [trial(t) if t < 10**16 else dict(factorint(t)) for t in terms + [total]]
     if factorint: out['factor_crosscheck'] = all(dict(factorint(t)) == f for t, f in zip(terms + [total], facs))
+    pf = pari(terms + [total])
+    if pf: out['pari_crosscheck'] = pf == facs
     if isprime: out['primes_certified'] = all(isprime(p) for f in facs for p in f)
     out['r_powerful'] = all(min(f.values()) >= r for f in facs)
     out['joint_gcd_1'] = reduce(gcd, terms) == 1

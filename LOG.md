@@ -9,3 +9,4 @@
 - 2026-11-14 (soir, local) : verify.py relancé avec sympy : factorisations concordantes avec la division par essais, facteurs premiers certifiés. Toujours pas de PARI/GP.
 - 2026-11-14 (soir, local) : conjectures.io lu (notes/raw/conjectures_io_939.html) : preuve Lean approuvée le 06/08/2026 puis retirée, l'énoncé formel d'alors étant défectueux (positivité omise). Rien de nouveau sur le problème.
 - 2026-11-14 (soir, local) : **r = 4, a + b = c, pgcd 1, exhaustif jusqu'à c <= 9e18 : aucune solution** (N = 436945, 1570 s). Une seule exécution.
+- 2026-11-14 (soir, local) : PARI/GP installé ; verify.py recoupe maintenant les factorisations par PARI (facteurs prouvés premiers par isprime) en plus de sympy : concordant sur les trois solutions vérifiées.

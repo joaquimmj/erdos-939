@@ -27,8 +27,8 @@ factorisation naïve sur de petites bornes) et que toutes les sommes sont testé
 Le code n'a été relu par personne d'autre que des IA.
 
 ## Vérification des solutions connues (protocole H)
-results/verification_known.txt : somme exacte, factorisations par division par essais **et** par sympy (concordantes),
-primalité des facteurs par sympy, pgcd global 1. PARI/GP n'est pas installé : la seconde méthode est sympy, pas PARI.
+results/verification_known.txt : somme exacte, factorisations par division par essais, par sympy **et** par PARI/GP
+(concordantes), primalité des facteurs prouvée par sympy et par PARI (isprime), pgcd global 1.
 
 ## O3 (infinité pour r = 5)
 Rien de prouvé. notes/o3_r5.md : pourquoi l'identité de Price s'arrête à r = 6, une tentative de regroupement
