@@ -20,6 +20,7 @@ vérifications et des recherches exhaustives bornées.
 | idem | e <= 1e16 | **2 solutions, les deux déjà connues** (N = 16266 nombres 5-puissants, 124315057 sommes de paires, 1513 s) | calcul exact, une seule exécution | results/r5_1e16.txt |
 | idem, second algorithme indépendant (search_r5_seg.py) | e <= 1e16 | 2 solutions, les mêmes : le résultat à 1e16 est confirmé par deux méthodes | calcul exact, deux exécutions indépendantes | results/r5_1e16_seg.txt |
 | idem, second algorithme | **e <= 9e18** | **2 solutions, les deux déjà connues** (N = 72736 nombres 5-puissants, 172 segments, 2744 s sur 5 processus) | calcul exact, une seule exécution à cette borne | results/r5_9e18.txt |
+| idem, troisième programme au-delà de 64 bits (search_r5_wide.py) | **e <= 1e20** | **2 solutions, les deux déjà connues** (N = 122594 nombres 5-puissants, 487 segments ; contrôles de couverture passés) | calcul exact, une seule exécution à cette borne ; recouvre et confirme le résultat à 9e18 | results/r5_1e20.txt |
 | r = 4, a+b = c, pgcd(a,b) = 1 | c <= 1e14 | aucune solution (même avec a = 1) | calcul exact | results/r4_1e14.txt |
 | idem | c <= 9e18 | **aucune solution, même avec a = 1** (N = 436945 nombres 4-puissants, 1570 s sur 8 processus) | calcul exact, confirmé (ligne suivante) | results/r4_9e18.txt |
 | idem, second chemin de calcul (search_r4_alt.py) | c <= 9e18 | aucune solution : résultat confirmé | calcul exact, deux exécutions indépendantes | results/r4_9e18_alt.txt |
@@ -37,11 +38,15 @@ results/verification_known.txt : somme exacte, factorisations par division par e
 Rien de prouvé sur la question elle-même. Résultats négatifs partiels sur les identités polynomiales « à la Price » à quatre
 termes : notes/o3_identities.md. Au plus un terme peut être un monôme (preuve à la main) ; le cas « un monôme et trois termes à une
 racine » est exclu par un calcul exact (33963 bases de Gröbner) ; aucune identité sur 138 configurations de racines testées.
-Restent ouverts dans ce cadre : un monôme avec au moins quatre facteurs non libres, et quatre termes non monomiaux. notes/o3_r5.md : pourquoi l'identité de Price s'arrête à r = 6, une tentative de regroupement
+Restent ouverts dans ce cadre : un monôme avec au moins quatre facteurs non libres, et quatre termes non monomiaux.
+
+Second mécanisme exploré (identités au-dessus d'une équation de Fermat généralisée, même note) : aucune identité à quatre termes
+pour les signatures qui ont une infinité de solutions. Seul sous-produit : la famille restreinte (U+V)² = U² + 2UV + V², cherchée
+exhaustivement pour U, V <= 4,5e18 (donc e jusqu'à environ 2·10^37) : **aucune solution** (results/r5_square_family_4.5e18.txt). notes/o3_r5.md : pourquoi l'identité de Price s'arrête à r = 6, une tentative de regroupement
 (impasse), pistes non explorées.
 
 ## Non fait
 - Recentrage des objectifs sur r = 5 : pas encore validé par Joaquim.
 - `sorry` Lean (`infinite_of_six_le`, `seven`, `eight`) : non abordés.
-- Aucune seconde exécution indépendante de la recherche r = 5 à 9e18. Celles de r = 5 à 1e16 et de r = 4 à 9e18 sont confirmées par deux méthodes.
+- Aucune seconde exécution indépendante de la recherche r = 5 entre 9e18 et 1e20 ; jusqu'à 9e18 elle est confirmée par deux programmes. Celles de r = 5 à 1e16 et de r = 4 à 9e18 sont confirmées par deux méthodes.
   Les deux méthodes partagent toutefois le même générateur de nombres r-puissants (rpow.py, testé contre la factorisation naïve).

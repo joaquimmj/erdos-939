@@ -20,9 +20,10 @@ Un polynôme à s monômes non nuls n'a pas de racine non nulle de multiplicité
 (Récurrence sur s : diviser par le monôme de plus bas degré puis dériver.)
 
 ## Proposition 1 : s >= 2 est impossible (preuve à la main, tous degrés)
+- s = 4 : quatre monômes sans sous-somme nulle ont tous le même exposant, donc une racine commune (0 ou l'infini).
 - s = 3 : un terme non monomial serait combinaison de trois monômes, avec une racine non nulle de multiplicité
   >= 5 : contredit le lemme A.
-- s = 2 : T1 + T2 = −(α t^m + β t^n). Une racine commune à T1 et T2 serait racine de multiplicité >= 5 du binôme :
+- s = 2 : T1 + T2 = −(α t^m + β t^n), avec m ≠ n (si m = n, on est ramené à s = 3 pour un seul monôme : même argument avec (θ − m)). Une racine commune à T1 et T2 serait racine de multiplicité >= 5 du binôme :
   exclu par le lemme A. Les ensembles de racines A de T1 et B de T2 sont donc disjoints. Appliquer
   (θ − m)(θ − n) : on obtient W1 + W2 = 0 avec W_i = t^(a_i) ∏ (t − ρ)^(e_iρ − 2) · Q_i, deg Q_1 <= 2|A|,
   deg Q_2 <= 2|B|, et W_i ≠ 0 (sinon T_i serait un binôme, lemme A). Chaque racine de A, de multiplicité >= 3
@@ -33,15 +34,17 @@ l'identité de Price ((X+Y)^5 − (X−Y)^5 = trois monômes) ne peut pas être 
 
 ## Proposition 2 : s = 1 et K = 3 est impossible (preuve assistée par ordinateur, exacte)
 Forme : c1 t^(a1) (t − 1)^(e1) + c2 t^(a2) (t − ρ)^(e2) + c3 t^(a3) (t − σ)^(e3) = α t^m.
-- Les trois racines sont distinctes : si T1 et T2 partageaient ρ, alors (θ − m)T3 = t^(a3)(t − σ)^(e3 − 1)·(degré <= 1)
-  s'annulerait en ρ à l'ordre >= 4.
-- min a_i = 0 (sinon α = 0).
+- Les trois racines sont distinctes. Une racine commune aux trois termes annulerait α t^m. Si T1 et T2 seulement partageaient ρ,
+  alors (θ − m)T3 = t^(a3)(t − σ)^(e3 − 1)·(degré <= 1), qui est non nul (T3 n'est pas un monôme), s'annulerait en ρ à l'ordre >= 4.
+- min a_i = 0 : sans racine commune, min(a_1, a_2, a_3, m) = 0 ; si tous les a_i étaient > 0 on aurait m = 0 et α = 0 en évaluant en t = 0.
 - Borne de degré : (θ − m) donne U1 + U2 + U3 = 0 avec U_i = c_i t^(a_i) (t − ρ_i)^(e_i − 1) Q_i, deg Q_i <= 1.
-  Le pgcd g des U_i est de degré <= 2 (au plus le facteur t et un ρ_i, car deux ρ dans g annuleraient un Q_k),
+  Le pgcd g des U_i est de degré <= 2 : il vaut 1, t, (t − ρ_i), t(t − ρ_i) ou (t − τ) pour une racine τ commune aux trois Q_i
+  (deux ρ dans g annuleraient un Q_k ; et t | g force m = 0, donc la racine des Q_i concernés est 0, ce qui exclut τ),
   et U1U2U3/g³ a au plus 7 racines distinctes. Mason–Stothers donne deg(U_i/g) <= 6, donc a_i + e_i <= 9.
 - Calcul (`search/identities_k3.py`) : pour chaque motif (a_i, e_i) avec a_i + e_i <= 10, chaque position de la
   racine 1 et chaque m, base de Gröbner sur Q des mineurs 3×3, saturée par ρσ(ρ−1)(σ−1)(ρ−σ). Base = {1} signifie
-  aucune solution complexe. Résultat : **33963 systèmes, tous exclus** (base {1}), aucun cas dégénéré
+  aucune solution complexe (un sous-ensemble de mineurs suffit pour exclure : moins d'équations, plus de solutions).
+  Ce résultat repose sur `sympy.groebner` seul, sans second système de calcul formel. Résultat : **33963 systèmes, tous exclus** (base {1}), aucun cas dégénéré
   (`results/identities_k3_part0.txt`, `results/identities_k3_part1.txt`).
 
 ## Recherches numériques sur des ensembles de racines fixés (s et K quelconques)
@@ -61,3 +64,33 @@ s = 2, K = 2 jusqu'au degré 16 (déjà couvert par la proposition 1) : 0 soluti
 - Les racines non rationnelles en dehors des facteurs quadratiques testés.
 - Et surtout : une famille infinie pourrait venir d'un tout autre mécanisme (courbes de genre 0 ou 1, F.3.4 du
   dossier). Ce cadre ne le voit pas.
+
+## Second mécanisme exploré : identités au-dessus d'une équation de Fermat généralisée
+Idée : remplacer les variables libres X = x^5, Y = y^5 par un triplet X + Y = Z où X = A·x^p, Y = B·y^q,
+Z = C·z^s parcourt les solutions d'une équation de Fermat généralisée qui en a une infinité
+(1/p + 1/q + 1/s > 1, par exemple x² + y³ = z⁵). Un monôme X^a Y^b Z^c est alors 5-puissant dès que chaque
+exposant est nul ou au moins égal au seuil ⌈5/p⌉, ⌈5/q⌉, ⌈5/s⌉. Il suffirait d'une relation linéaire entre
+quatre tels monômes de même degré.
+
+`search/identities_gfermat.py` liste toutes ces relations (minimales, sans facteur commun). Résultat jusqu'au
+degré 13 : **aucune** pour les seuils (3,2,1), (3,2,2), (3,3,1), (3,3,2), (2,2,2), (2,2,1), (3,1,1), c'est-à-dire
+pour toutes les signatures sphériques ou euclidiennes. Le théorème de Brownawell–Masser borne le degré par 3(|S| − 2) = 3
+pour S = {0, −1, ∞}, donc le degré 13 couvre tout ce cadre avec marge (borne citée, non redémontrée ici).
+La seule relation trouvée est pour les seuils (2,1,1) : X² + 2YZ = Y² + Z² avec X = Z − Y, soit
+(U + V)² = U² + 2UV + V². Elle correspond à une signature hyperbolique : elle ne donne pas de famille infinie
+connue, mais une **famille restreinte** de solutions de r = 5 :
+
+> si U, V > 0, pgcd(U, V) = 1, V impair 5-puissant, U = 2^k·m avec k >= 4 et m impair 5-puissant, et W = U + V
+> 3-puissant, alors U² + 2UV + V² = W² est une solution (pgcd global 1).
+
+`search/search_square_family.py` cherche toutes ces paires avec V > 1 jusqu'à une borne B sur U et V ; la recherche est donc
+exhaustive pour e <= B², très au-delà de la borne exhaustive générale. Le cas V = 1 (terme c = 1) est contrôlé à part : aucun U. Résultat : pour B = 4,5e18 (14343 valeurs de V, 56111 de U, 9380370 nombres 3-puissants <= 2B),
+**aucune paire** (`results/r5_square_family_4.5e18.txt`). Il n'y a donc aucune solution de cette forme avec e <= 2·10^37 environ.
+Heuristique : environ B^(2/5) paires, probabilité B^(−2/3) que W soit 3-puissant, soit B^(−4/15) par échelle :
+un nombre fini de solutions attendu, cohérent avec la conjecture abc (qualité 15/11 > 1).
+
+Variante cubique écartée : (X+Y)³ = (X−Y)³ + 6X²Y + 2Y³ demande X 3-puissant, Y 5-puissant (à cause du terme
+6X²Y) et X ± Y tous deux 2-puissants : environ B^(−7/15) par échelle, encore plus rare. Non cherchée.
+
+Leçon : dans toutes ces constructions, le terme croisé force les variables à être 5-puissantes, et la
+condition restante est de type abc. Aucune ne donne de famille infinie.

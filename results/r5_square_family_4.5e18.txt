@@ -1,0 +1,1 @@
+B=4500000000000000000 odd 5-powerful=14343 even side=56111 3-powerful<=2B=9380370 pairs (U,V): 0 time=571s
