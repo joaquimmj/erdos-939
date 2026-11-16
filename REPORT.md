@@ -28,7 +28,7 @@ vérifications et des recherches exhaustives bornées.
 
 Portée : « exhaustif » veut dire que tous les nombres r-puissants <= borne sont énumérés (générateur comparé à la
 factorisation naïve sur de petites bornes) et que toutes les sommes sont testées en entiers 64 bits exacts.
-Le code n'a été relu par personne d'autre que des IA.
+Le code n’a pas encore été relu par des pairs.
 
 ## Vérification des solutions connues (protocole H)
 results/verification_known.txt : somme exacte, factorisations par division par essais, par sympy **et** par PARI/GP
