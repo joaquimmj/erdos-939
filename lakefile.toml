@@ -1,0 +1,15 @@
+name = "erdos939"
+defaultTargets = ["Erdos939"]
+
+[leanOptions]
+pp.unicode.fun = true
+autoImplicit = false
+
+# Pinned so that `Erdos939Sums` is exactly the definition of formal-conjectures at this commit.
+[[require]]
+name = "formal_conjectures"
+git = "https://github.com/google-deepmind/formal-conjectures"
+rev = "b576d527b271b936f9e61c0e367c302d7386bc80"
+
+[[lean_lib]]
+name = "Erdos939"
