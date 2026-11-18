@@ -15,9 +15,9 @@ from rpow import rpowerful, primes_upto
 
 SMALL = primes_upto(61)
 
-def _init(r, X, sh):
+def _init(r, X, sh, primes=None):
     global L, K, LO, MASK, N, SH, M
-    L = rpowerful(r, X); N = len(L); SH = sh; M = (1 << sh) - 1
+    L = rpowerful(r, X, primes); N = len(L); SH = sh; M = (1 << sh) - 1
     K = np.array([n >> sh for n in L], dtype=np.int64); LO = np.array([n & M for n in L], dtype=np.int64)
     MASK = np.array([sum(1 << t for t, p in enumerate(SMALL) if n % p == 0) for n in L], dtype=np.int64)
     assert int(K[-1]) < 2**62 - 2
@@ -67,12 +67,12 @@ def segments(KX, budget):
         out.append((lo, a)); lo = a
     return out
 
-def search(r, X, budget=30_000_000, workers=None, sh=None, log=None):
+def search(r, X, budget=30_000_000, workers=None, sh=None, log=None, primes=None):
     if sh is None: sh = max(0, X.bit_length() - 61)
-    _init(r, X, sh); KX = X >> sh; segs = segments(KX, budget); t0 = time.time()
+    _init(r, X, sh, primes); KX = X >> sh; segs = segments(KX, budget); t0 = time.time()
     if log: print(f'N={N}, shift={sh}, segments={len(segs)}', file=log, flush=True)
     sols = set(); ns = nd = 0
-    with Pool(workers or max(1, (os.cpu_count() or 2) // 2), _init, (r, X, sh)) as pool:
+    with Pool(workers or max(1, (os.cpu_count() or 2) // 2), _init, (r, X, sh, primes)) as pool:
         for k, (part, a, b) in enumerate(pool.imap_unordered(_segment, segs)):
             sols.update(part); ns += a; nd += b
             if log and (k + 1) % 10 == 0: print(f'segments {k+1}/{len(segs)} {time.time()-t0:.0f}s sols={len(sols)}', file=log, flush=True)
@@ -83,6 +83,7 @@ def search(r, X, budget=30_000_000, workers=None, sh=None, log=None):
 
 if __name__ == '__main__':
     r = int(sys.argv[1]); X = int(float(sys.argv[2])); t = time.time()
-    sols, n = search(r, X, workers=int(sys.argv[3]) if len(sys.argv) > 3 else None, log=sys.stdout)
-    print(f'r={r} X={X} N={n} solutions={len(sols)} time={time.time()-t:.0f}s')
+    ps = [int(p) for p in sys.argv[4].split(',')] if len(sys.argv) > 4 else None   # optional support, e.g. 2,3,7,13,17
+    sols, n = search(r, X, workers=int(sys.argv[3]) if len(sys.argv) > 3 else None, log=sys.stdout, primes=ps)
+    print(f'r={r} X={X} primes={ps or "all"} N={n} solutions={len(sols)} time={time.time()-t:.0f}s')
     for s in sols: print(*s)

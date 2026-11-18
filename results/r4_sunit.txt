@@ -1,0 +1,12 @@
+solutions_2_3_5_7.txt: 63 triples (matches header), largest c = 4375
+  all three 2-powerful (1 allowed): 5 (1, 8, 9) (9, 16, 25) (32, 49, 81) (49, 576, 625) (100, 243, 343)
+  all three 3-powerful (1 allowed): 0
+  all three 4-powerful (1 allowed): 0
+solutions_2_3_5_7_11_13_17_19_23_29_31_37_41_43_47_53.txt: 1663449 triples (matches header), largest c = 7058844079092540383
+  all three 2-powerful (1 allowed): 562 (1, 8, 9) (9, 16, 25) (32, 49, 81) (1, 288, 289) (4, 121, 125) (169, 343, 512)
+  all three 3-powerful (1 allowed): 0
+  all three 4-powerful (1 allowed): 0
+solutions_uptoRadical_10000000.txt: 432408 triples (matches header), largest c = 8251953408
+  all three 2-powerful (1 allowed): 1068 (1, 8, 9) (9, 16, 25) (32, 49, 81) (1, 288, 289) (4, 121, 125) (169, 343, 512)
+  all three 3-powerful (1 allowed): 0
+  all three 4-powerful (1 allowed): 0

@@ -9,8 +9,9 @@ def iroot(n, k):
     while x**k > n: x -= 1
     while (x+1)**k <= n: x += 1
     return x
-def rpowerful(r, X):
-    ps = primes_upto(iroot(X, r) + 1); out = []
+def rpowerful(r, X, primes=None):
+    """primes: restrict the support to this sorted list (default: every prime)"""
+    ps = primes_upto(iroot(X, r) + 1) if primes is None else list(primes); out = []
     def rec(i, n):
         out.append(n)
         for j in range(i, len(ps)):

@@ -45,8 +45,36 @@ pour les signatures qui ont une infinité de solutions. Seul sous-produit : la f
 exhaustivement pour U, V <= 4,5e18 (donc e jusqu'à environ 2·10^37) : **aucune solution** (results/r5_square_family_4.5e18.txt). notes/o3_r5.md : pourquoi l'identité de Price s'arrête à r = 6, une tentative de regroupement
 (impasse), pistes non explorées.
 
+## Suite du 18/11/2026 : S-unités (r = 4), support premier (r = 5), Lean
+
+### r = 4 : aucune solution à petits premiers, sans borne de taille
+`search/check_sunit_r4.py` filtre les listes **complètes** de von Känel et Matschke (arXiv:1605.06079, données sur
+github.com/bmatschke/solving-classical-diophantine-equations) des a + b = c premiers entre eux :
+- tous les premiers de abc <= 53 (1 663 449 triplets) : **aucun** triplet où a, b, c sont tous 4-puissants (a = 1 admis) ;
+- rad(abc) <= 10^7 (432 408 triplets) : **aucun** non plus.
+Aucun triplet 3-puissant dans ces listes (celui de Nitaj contient 73, 271, 919) ; 562 et 1068 triplets 2-puissants (contrôle).
+Sortie : `results/r4_sunit.txt`. Le nombre de triplets lus est comparé à l'en-tête de chaque fichier.
+C'est une méthode sans rapport avec `rpow.py` ni avec les recherches par taille. Le plus grand c de la liste « premiers <= 53 »
+vaut 7 058 844 079 092 540 383 < 9e18 : cette liste est donc aussi un contrôle indépendant de `r4_9e18.txt` sur ces supports.
+Réserve : la complétude des listes repose sur l'article et le code de leurs auteurs ; je ne l'ai pas revérifiée.
+
+### r = 5 : la recherche « par support » ne dépasse pas vraiment 1e20
+`search_r5_wide.py` accepte un ensemble de premiers (4e argument) ; `test_support.py` : Kitamura est retrouvée avec
+{2,3,7,13,17}, Cambie avec {2,3,5,11,13,23,61}, rien avec un ensemble plus petit.
+Mais les nombres 5-puissants à petits premiers sont trop denses pour une rencontre au milieu à grande taille : avec les
+8 plus petits premiers il y en a 1,4 million sous 1e30 et 10 millions sous 1e37 (2,9 et 28 millions avec 12 premiers), soit
+1e12 à 1e15 paires. L'hypothèse du plan (« bien au-delà de 1e20 ») ne tient pas avec cet algorithme.
+Fait : premiers <= 37, e <= 1e22 : seule la solution de Kitamura (152 136 nombres, 757 segments, 2 103 s sur 4 processus ; une exécution) (`results/r5_primes37_1e22.txt`).
+Aller plus loin demande un autre algorithme (réduction de réseaux sur les exposants, comme pour les S-unités à 3 termes).
+
+### Lean
+Les quatre énoncés résolus de formal-conjectures (`infinite_of_six_le`, `finite`, `seven`, `eight`) sont prouvés dans un repo
+séparé `erdos939-lean` (formalisation d'Aristotle portée en Lean v4.33.1, plus un pont vers `Erdos939Sums`). Non poussé.
+
+### Piste C (abc@home)
+Non faite : le serveur de Leiden (pub.math.leidenuniv.nl) répondait 503.
+
 ## Non fait
 - Recentrage des objectifs sur r = 5 : pas encore validé par Joaquim.
-- `sorry` Lean (`infinite_of_six_le`, `seven`, `eight`) : non abordés.
 - Aucune seconde exécution indépendante de la recherche r = 5 entre 9e18 et 1e20 ; jusqu'à 9e18 elle est confirmée par deux programmes. Celles de r = 5 à 1e16 et de r = 4 à 9e18 sont confirmées par deux méthodes.
   Les deux méthodes partagent toutefois le même générateur de nombres r-puissants (rpow.py, testé contre la factorisation naïve).

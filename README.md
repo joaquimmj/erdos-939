@@ -16,6 +16,8 @@ solutions independently, and rules out some families of polynomial identities.
 |---|---|---|
 | r = 5: a + b + c = e, gcd(a, b, c) = 1 | e ≤ **10²⁰** | only the two known solutions |
 | r = 4: a + b = c, gcd(a, b) = 1 | c ≤ **9·10¹⁸** | no solution, even with a = 1 |
+| r = 4, all primes of abc ≤ 53, or rad(abc) ≤ 10⁷ | **no size bound** | no solution (filter of the complete S-unit lists of von Känel–Matschke) |
+| r = 5, all primes ≤ 37 | e ≤ 10²² | only Kitamura's solution (one run) |
 | r = 5, restricted family (U + V)² = U² + 2UV + V² | U, V ≤ 4.5·10¹⁸ (e up to about 2·10³⁷) | no solution |
 | r = 3 (control) | c ≤ 10¹⁰ | finds Nitaj's solution |
 
