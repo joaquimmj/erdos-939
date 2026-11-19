@@ -88,7 +88,10 @@ Une seule exécution, un seul générateur (`rpow.py`) à cette borne.
 contrôles d'exhaustivité passés : **toujours les 2 seules solutions** (Kitamura, Cambie), donc aucune autre avec
 e ≤ 10^22 (`results/r5_1e22.txt`). Le découpage a été interrompu trois fois par des redémarrages de la machine et
 repris depuis le point de sauvegarde ; la recherche elle-même (11 016 s, dernière exécution) n'a pas été interrompue.
-Une seule exécution, un seul générateur à cette borne.
+Seconde exécution avec le second générateur `rpow2.py` (`run_gen2.py 5 1e22 4`, même découpage en segments,
+réutilisé depuis le point de sauvegarde) : même N = 329 544, contrôles d'exhaustivité passés, **les 2 mêmes solutions**
+(`results/r5_1e22_gen2.txt`, 9 792 s). Jusqu'à 1e22 le résultat repose donc sur deux générateurs indépendants ; le
+programme de recherche est le même.
 
 ### r = 4 (et r = 3) : un terme carré ou cube, de taille et de support quelconques (19/11/2026)
 Les données de von Känel–Matschke contiennent aussi les listes **complètes** des couples (x, y), x ≥ y, à support
