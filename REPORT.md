@@ -78,6 +78,11 @@ définition sur de petites bornes (`results/generators_agree.txt`).
 `search/run_gen2.py 5 1e20` : la recherche complète refaite avec ce générateur : **les 2 mêmes solutions**
 (`results/r5_1e20_gen2.txt`, 1 408 s sur 4 processus). L'algorithme de recherche est le même que pour `r5_1e20.txt`.
 
+### r = 5 jusqu'à 1e21 (19/11/2026)
+`search_r5_wide.py 5 1e21 4` : recherche complète, N = 201 284 nombres 5-puissants, 1 313 segments, 4 664 s :
+**toujours les 2 seules solutions** (Kitamura, Cambie), donc aucune autre avec e ≤ 10^21 (`results/r5_1e21.txt`).
+Une seule exécution, un seul générateur (`rpow.py`) à cette borne.
+
 ### Piste C (abc@home)
 Non faite : le serveur de Leiden (pub.math.leidenuniv.nl) répondait 503.
 
