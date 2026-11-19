@@ -1,0 +1,5 @@
+N=329544, shift=13, segments=3519
+segments 10/3519 31s sols=2
+segments 20/3519 53s sols=2
+segments 30/3519 80s sols=2
+segments 40/3519 103s sols=2
