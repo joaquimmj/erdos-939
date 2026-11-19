@@ -1,0 +1,4 @@
+r=5 X=100000000000000000000: 122594 numbers, both generators agree, sha256=3748a06ad0355f19
+r=4 X=9000000000000000000: 436945 numbers, both generators agree, sha256=41942e775aa945b8
+r=5 X=9000000000000000000: 72736 numbers, both generators agree, sha256=ed8a59680dfc0bbe
+r=3 X=10000000000: 8348 numbers, both generators agree, sha256=19b35efb0f6935bc
