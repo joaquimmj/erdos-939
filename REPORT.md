@@ -83,6 +83,15 @@ définition sur de petites bornes (`results/generators_agree.txt`).
 **toujours les 2 seules solutions** (Kitamura, Cambie), donc aucune autre avec e ≤ 10^21 (`results/r5_1e21.txt`).
 Une seule exécution, un seul générateur (`rpow.py`) à cette borne.
 
+### Reprise sur point de sauvegarde (19/11/2026)
+Un redémarrage de la machine a tué la première exécution jusqu'à 1e22. `search_r5_wide.py` accepte maintenant
+`CKPT=<dossier>` : les segments (au fil du découpage) et chaque segment terminé (avec ses solutions) sont écrits et
+synchronisés sur disque ; relancer la même commande reprend là où on s'était arrêté. Test : `search/test_checkpoint.py`
+(arrêt brutal pendant le découpage puis pendant la recherche, résultat identique à une exécution sans reprise).
+Le point de sauvegarde de l'exécution 1e22 est poussé toutes les 15 min sur la branche `checkpoints`
+(`results/ckpt_r5_1e22/`). Pour reprendre ailleurs : copier ce dossier dans `results/` et relancer
+`CKPT=../results/ckpt_r5_1e22 python3 search_r5_wide.py 5 1e22 4`.
+
 ### Piste C (abc@home)
 Non faite : le serveur de Leiden (pub.math.leidenuniv.nl) répondait 503.
 

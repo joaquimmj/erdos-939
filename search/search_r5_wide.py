@@ -55,27 +55,65 @@ def _segment(seg):
         if gcd(gcd(a, b), cc) == 1: out.append((a, b, cc, ee))
     return out, len(sk), len(dk)
 
-def segments(KX, budget):
-    out = []; lo = 0
+def _append(f, line):
+    f.write(line + '\n'); f.flush(); os.fsync(f.fileno())
+
+def segments(KX, budget, path=None):
+    """path: checkpoint file, one 'lo hi' line per segment found, then 'end'; an interrupted run resumes from it."""
+    out = []
+    if path and os.path.exists(path):
+        rows = open(path).read().split('\n')
+        rows = rows[:-1]                                     # drop the possibly torn last line (no newline yet)
+        if rows and rows[-1] == 'end': return [tuple(map(int, l.split())) for l in rows[:-1]]
+        out = [tuple(map(int, l.split())) for l in rows]
+        with open(path, 'w') as f: f.write(''.join(f'{a} {b}\n' for a, b in out))
+    f = open(path, 'a') if path else None
+    lo = out[-1][1] if out else 0
     while lo <= KX:
-        if _count(lo, KX + 1) <= budget: out.append((lo, KX + 1)); break
+        if _count(lo, KX + 1) <= budget: out.append((lo, KX + 1)); f and _append(f, f'{lo} {KX + 1}'); break
         a, b = lo + 1, KX + 1
         while b - a > 1:
             m = (a + b) // 2
             if _count(lo, m) <= budget: a = m
             else: b = m
-        out.append((lo, a)); lo = a
+        out.append((lo, a)); f and _append(f, f'{lo} {a}'); lo = a
+    if f: _append(f, 'end'); f.close()
     return out
 
-def search(r, X, budget=30_000_000, workers=None, sh=None, log=None, primes=None):
+def _segment_k(ks):
+    k, seg = ks; part, a, b = _segment(seg); return k, part, a, b
+
+def search(r, X, budget=30_000_000, workers=None, sh=None, log=None, primes=None, ckpt=None):
+    """ckpt: directory for checkpoints (segments.txt, done.txt); rerunning with the same arguments resumes."""
     if sh is None: sh = max(0, X.bit_length() - 61)
-    _init(r, X, sh, primes); KX = X >> sh; segs = segments(KX, budget); t0 = time.time()
+    if ckpt:
+        os.makedirs(ckpt, exist_ok=True); tag = f'r={r} X={X} sh={sh} budget={budget} primes={primes}'
+        tp = os.path.join(ckpt, 'params.txt')
+        if os.path.exists(tp): assert open(tp).read() == tag, ('checkpoint of another run', ckpt)
+        else: open(tp, 'w').write(tag)
+    _init(r, X, sh, primes); KX = X >> sh
+    segs = segments(KX, budget, ckpt and os.path.join(ckpt, 'segments.txt')); t0 = time.time()
     if log: print(f'N={N}, shift={sh}, segments={len(segs)}', file=log, flush=True)
-    sols = set(); ns = nd = 0
+    sols = set(); ns = nd = 0; done = set(); f = None
+    if ckpt:                                                 # done.txt: 'sol a b c e' lines, then 'seg k ns nd' per segment
+        dp = os.path.join(ckpt, 'done.txt')
+        if os.path.exists(dp):
+            txt = open(dp).read(); txt = txt[:txt.rfind('\n') + 1]   # drop a torn last line
+            open(dp, 'w').write(txt)
+            for l in txt.split('\n')[:-1]:
+                w = l.split()
+                if w[0] == 'seg': done.add(int(w[1])); ns += int(w[2]); nd += int(w[3])
+                else: sols.add(tuple(map(int, w[1:])))
+            if log: print(f'resumed: {len(done)} segments already done, sols={len(sols)}', file=log, flush=True)
+        f = open(dp, 'a')
+    todo = [(k, sg) for k, sg in enumerate(segs) if k not in done]
     with Pool(workers or max(1, (os.cpu_count() or 2) // 2), _init, (r, X, sh, primes)) as pool:
-        for k, (part, a, b) in enumerate(pool.imap_unordered(_segment, segs)):
+        for n, (k, part, a, b) in enumerate(pool.imap_unordered(_segment_k, todo), len(done)):
             sols.update(part); ns += a; nd += b
-            if log and (k + 1) % 10 == 0: print(f'segments {k+1}/{len(segs)} {time.time()-t0:.0f}s sols={len(sols)}', file=log, flush=True)
+            if f:                                            # solutions before the 'seg' line, so a torn write loses only the segment
+                f.write(''.join('sol ' + ' '.join(map(str, s)) + '\n' for s in part)); _append(f, f'seg {k} {a} {b}')
+            if log and (n + 1) % 10 == 0: print(f'segments {n+1}/{len(segs)} {time.time()-t0:.0f}s sols={len(sols)}', file=log, flush=True)
+    if f: f.close()
     lim = (KX + 1) << sh                                    # sums with an admissible key are those < lim
     exp_s = sum(max(0, bisect.bisect_left(L, lim - L[q]) - q) for q in range(N))
     assert nd == N*(N-1)//2 and ns == exp_s, ('coverage', nd, N*(N-1)//2, ns, exp_s)
@@ -84,6 +122,7 @@ def search(r, X, budget=30_000_000, workers=None, sh=None, log=None, primes=None
 if __name__ == '__main__':
     r = int(sys.argv[1]); X = int(float(sys.argv[2])); t = time.time()
     ps = [int(p) for p in sys.argv[4].split(',')] if len(sys.argv) > 4 else None   # optional support, e.g. 2,3,7,13,17
-    sols, n = search(r, X, workers=int(sys.argv[3]) if len(sys.argv) > 3 else None, log=sys.stdout, primes=ps)
+    ck = os.environ.get('CKPT')                                                  # checkpoint directory, optional
+    sols, n = search(r, X, workers=int(sys.argv[3]) if len(sys.argv) > 3 else None, log=sys.stdout, primes=ps, ckpt=ck)
     print(f'r={r} X={X} primes={ps or "all"} N={n} solutions={len(sols)} time={time.time()-t:.0f}s')
     for s in sols: print(*s)
