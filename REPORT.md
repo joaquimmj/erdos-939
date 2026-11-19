@@ -90,6 +90,18 @@ e ≤ 10^22 (`results/r5_1e22.txt`). Le découpage a été interrompu trois fois
 repris depuis le point de sauvegarde ; la recherche elle-même (11 016 s, dernière exécution) n'a pas été interrompue.
 Une seule exécution, un seul générateur à cette borne.
 
+### r = 4 (et r = 3) : un terme carré ou cube, de taille et de support quelconques (19/11/2026)
+Les données de von Känel–Matschke contiennent aussi les listes **complètes** des couples (x, y), x ≥ y, à support
+dans S, pgcd sans facteur carré, avec x + y un carré (resp. un cube) (`sums-of-units-equations/*.txt`), pour
+S = {2, 3, 5, 7, 11}, S = {2, 3, 5, p} (p ≤ 31), S = {2, 3, p} (p ≤ 100) et S = {2, p} (p ≤ 250). Une solution
+première entre elle a + b = c dont deux termes sont à support dans S et dont le troisième est un carré (resp. un cube)
+y figure : (b, a) si ce terme est c, (c, −b) si c'est a ou b. Filtre `search/check_sunit_powers_r4.py`
+(`results/r4_sunit_powers.txt`) : **aucun triplet dont les trois termes sont 3-puissants**, donc a fortiori aucun
+4-puissant, dans aucune des huit listes ; le filtre retrouve bien des triplets 2-puissants (8 + 1 = 9, 16 + 9 = 25, …).
+Énoncé : pour ces ensembles S, **il n'existe aucune solution de r = 4 (ni de r = 3) dont deux termes sont à support dans S
+et dont le troisième est un carré ou un cube, quelle que soit sa taille et quels que soient ses premiers.**
+Comme pour r4_sunit.txt, la complétude repose sur l'article des auteurs (arXiv:1605.06079), non revérifiée ici.
+
 ### Reprise sur point de sauvegarde (19/11/2026)
 Un redémarrage de la machine a tué la première exécution jusqu'à 1e22. `search_r5_wide.py` accepte maintenant
 `CKPT=<dossier>` : les segments (au fil du découpage) et chaque segment terminé (avec ses solutions) sont écrits et

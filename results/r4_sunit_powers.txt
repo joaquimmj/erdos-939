@@ -1,0 +1,32 @@
+sumsOfUnitsBeingACube__S_2_3_5_7_11.txt: 883 lines, 883 distinct pairs (header 883), 1 set(s) S, largest |x| = 378125000
+  x, |y|, x+y all 2-powerful, gcd 1: 15 (9, -8, 1) (9, -1, 8) (121, 4, 125) (243, 100, 343) (968, -625, 343)
+  x, |y|, x+y all 3-powerful, gcd 1: 0
+  x, |y|, x+y all 4-powerful, gcd 1: 0
+sumsOfUnitsBeingACube__S_2_3_5_p_pMax31.txt: 1791 lines, 1217 distinct pairs (header 1217), 8 set(s) S, largest |x| = 75078125
+  x, |y|, x+y all 2-powerful, gcd 1: 43 (9, -8, 1) (9, -1, 8) (243, 100, 343) (1225, 972, 2197) (1323, 8, 1331)
+  x, |y|, x+y all 3-powerful, gcd 1: 0
+  x, |y|, x+y all 4-powerful, gcd 1: 0
+sumsOfUnitsBeingACube__S_2_3_p_pMax100.txt: 1192 lines, 730 distinct pairs (header 730), 23 set(s) S, largest |x| = 18429849
+  x, |y|, x+y all 2-powerful, gcd 1: 57 (9, -8, 1) (9, -1, 8) (243, 100, 343) (9, -8, 1) (9, -1, 8)
+  x, |y|, x+y all 3-powerful, gcd 1: 0
+  x, |y|, x+y all 4-powerful, gcd 1: 0
+sumsOfUnitsBeingACube__S_2_p_pMax250.txt: 627 lines, 372 distinct pairs (header 372), 52 set(s) S, largest |x| = 2064512
+  x, |y|, x+y all 2-powerful, gcd 1: 5 (9, -8, 1) (9, -1, 8) (121, 4, 125) (512, -169, 343) (5041, -128, 4913)
+  x, |y|, x+y all 3-powerful, gcd 1: 0
+  x, |y|, x+y all 4-powerful, gcd 1: 0
+sumsOfUnitsBeingASquare__S_2_3_5_7_11.txt: 1418 lines, 1418 distinct pairs (header 1418), 1 set(s) S, largest |x| = 22194483850
+  x, |y|, x+y all 2-powerful, gcd 1: 123 (8, 1, 9) (9, -8, 1) (16, 9, 25) (25, -16, 9) (25, -9, 16)
+  x, |y|, x+y all 3-powerful, gcd 1: 0
+  x, |y|, x+y all 4-powerful, gcd 1: 0
+sumsOfUnitsBeingASquare__S_2_3_5_p_pMax31.txt: 2460 lines, 1760 distinct pairs (header 1760), 8 set(s) S, largest |x| = 633881344
+  x, |y|, x+y all 2-powerful, gcd 1: 286 (8, 1, 9) (9, -8, 1) (16, 9, 25) (25, -16, 9) (25, -9, 16)
+  x, |y|, x+y all 3-powerful, gcd 1: 0
+  x, |y|, x+y all 4-powerful, gcd 1: 0
+sumsOfUnitsBeingASquare__S_2_3_p_pMax100.txt: 1267 lines, 783 distinct pairs (header 783), 23 set(s) S, largest |x| = 73085409
+  x, |y|, x+y all 2-powerful, gcd 1: 188 (8, 1, 9) (9, -8, 1) (16, 9, 25) (25, -16, 9) (25, -9, 16)
+  x, |y|, x+y all 3-powerful, gcd 1: 0
+  x, |y|, x+y all 4-powerful, gcd 1: 0
+sumsOfUnitsBeingASquare__S_2_p_pMax250.txt: 493 lines, 238 distinct pairs (header 238), 52 set(s) S, largest |x| = 114242
+  x, |y|, x+y all 2-powerful, gcd 1: 64 (8, 1, 9) (9, -8, 1) (16, 9, 25) (81, -32, 49) (288, 1, 289)
+  x, |y|, x+y all 3-powerful, gcd 1: 0
+  x, |y|, x+y all 4-powerful, gcd 1: 0
