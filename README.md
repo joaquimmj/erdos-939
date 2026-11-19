@@ -37,6 +37,13 @@ hand), the case of one monomial and three one-root terms is excluded by exact co
 and none of 138 tested root configurations gives an identity. Details in `notes/o3_identities.md`, and why Price's
 identity stops at r = 6 in `notes/o3_r5.md`.
 
+## Lean
+
+`lean/` proves, in Lean 4 with Mathlib, the four `research solved` statements of formal-conjectures for this
+problem (`Erdos939Sums r` is infinite for every r ≥ 6, and the `finite`, `seven`, `eight` variants), against their
+exact definitions. The construction is Price's (found with GPT-5.5 Pro); the formalisation is Aristotle's, ported to
+Lean v4.33.1. Build: `cd lean && lake exe cache get && lake build`. See `lean/README.md`.
+
 ## Layout
 
 | Path | Role |
