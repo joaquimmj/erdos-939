@@ -83,6 +83,13 @@ définition sur de petites bornes (`results/generators_agree.txt`).
 **toujours les 2 seules solutions** (Kitamura, Cambie), donc aucune autre avec e ≤ 10^21 (`results/r5_1e21.txt`).
 Une seule exécution, un seul générateur (`rpow.py`) à cette borne.
 
+### r = 5 jusqu'à 1e22 (19/11/2026)
+`CKPT=../results/ckpt_r5_1e22 python3 search_r5_wide.py 5 1e22 4` : N = 329 544 nombres 5-puissants, 3 519 segments,
+contrôles d'exhaustivité passés : **toujours les 2 seules solutions** (Kitamura, Cambie), donc aucune autre avec
+e ≤ 10^22 (`results/r5_1e22.txt`). Le découpage a été interrompu trois fois par des redémarrages de la machine et
+repris depuis le point de sauvegarde ; la recherche elle-même (11 016 s, dernière exécution) n'a pas été interrompue.
+Une seule exécution, un seul générateur à cette borne.
+
 ### Reprise sur point de sauvegarde (19/11/2026)
 Un redémarrage de la machine a tué la première exécution jusqu'à 1e22. `search_r5_wide.py` accepte maintenant
 `CKPT=<dossier>` : les segments (au fil du découpage) et chaque segment terminé (avec ses solutions) sont écrits et
