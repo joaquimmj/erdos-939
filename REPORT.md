@@ -71,10 +71,15 @@ Aller plus loin demande un autre algorithme (réduction de réseaux sur les expo
 Les quatre énoncés résolus de formal-conjectures (`infinite_of_six_le`, `finite`, `seven`, `eight`) sont prouvés dans un repo
 séparé `erdos939-lean` (formalisation d'Aristotle portée en Lean v4.33.1, plus un pont vers `Erdos939Sums`). Non poussé.
 
+### Seconde exécution r = 5 jusqu'à 1e20 et second générateur (19/11/2026)
+`search/rpow2.py` : second générateur écrit à part (premiers par division, construction premier par premier, racine par
+dichotomie). Mêmes listes que `rpow.py` pour r = 5 à 1e20 et 9e18, r = 4 à 9e18, r = 3 à 1e10, et les deux concordent avec la
+définition sur de petites bornes (`results/generators_agree.txt`).
+`search/run_gen2.py 5 1e20` : la recherche complète refaite avec ce générateur : **les 2 mêmes solutions**
+(`results/r5_1e20_gen2.txt`, 1 408 s sur 4 processus). L'algorithme de recherche est le même que pour `r5_1e20.txt`.
+
 ### Piste C (abc@home)
 Non faite : le serveur de Leiden (pub.math.leidenuniv.nl) répondait 503.
 
 ## Non fait
 - Recentrage des objectifs sur r = 5 : pas encore validé par Joaquim.
-- Aucune seconde exécution indépendante de la recherche r = 5 entre 9e18 et 1e20 ; jusqu'à 9e18 elle est confirmée par deux programmes. Celles de r = 5 à 1e16 et de r = 4 à 9e18 sont confirmées par deux méthodes.
-  Les deux méthodes partagent toutefois le même générateur de nombres r-puissants (rpow.py, testé contre la factorisation naïve).
