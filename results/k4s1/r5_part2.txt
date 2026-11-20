@@ -1,0 +1,5 @@
+R=5 d=10 part 2/4: 6738 systems so far, 0 not excluded, 31s
+R=5 d=11 part 2/4: 26186 systems so far, 0 not excluded, 52s
+R=5 d=12 part 2/4: 88062 systems so far, 0 not excluded, 92s
+R=5 d=13 part 2/4: 179652 systems so far, 0 not excluded, 152s
+R=5 d=14 part 2/4: 280684 systems so far, 0 not excluded, 225s

@@ -117,4 +117,15 @@ b_i = d − a_i − e_i, e_i >= 5, 0 et l'infini libres.
   libres) ne la rend rationnelle : les quatre racines non libres 1, −1, √5, −√5 ont un birapport irrationnel, alors que
   des racines rationnelles auraient un birapport rationnel, et le birapport est invariant par homographie.
 - **Conséquence : aucune identité de Price à quatre termes avec s = 0 et K = 4 n'existe sur Q pour r = 5.**
-  Restent ouverts : s = 1 avec K >= 4, s = 0 avec K >= 5 (la borne devient d <= 2K − 6 + Σ min(a_i, 2) + Σ min(b_i, 2)).
+
+## Cas s = 1, K = 4 : fermé (20/11/2026, preuve assistée par ordinateur)
+Un monôme, un terme à deux racines non libres et deux termes à une racine (seule répartition possible de K = 4 sur trois
+termes non monomiaux). Trois des termes sont indépendants (une relation à trois termes demanderait, par Mason–Stothers,
+que les trois partagent toutes leurs racines non libres, impossible ici), donc la même borne du wronskien vaut :
+d <= 2 + Σ min(a_i, 2) + Σ min(b_i, 2) <= 14, et d >= 10 puisque le terme à deux racines a un degré >= 10.
+`search/identities_k4s1.py` : tous les motifs admis, toutes les coïncidences de racines entre termes, saturation comme
+ci-dessus. **1 128 014 systèmes, aucun non exclu** (`results/k4s1/`). Calibrage : au seuil 2, le même code trouve une
+famille de solutions de dimension 1 (degré 4).
+**Conséquence : aucune identité de Price à quatre termes avec K <= 4 n'existe pour r = 5, même sur C, à part l'identité
+en √5 ci-dessus (s = 0), qui n'est pas rationnelle.** Avec les propositions 1 et 2, tous les cas K <= 4 sont traités.
+Reste ouvert : K >= 5 (la borne devient d <= 2K − 6 + Σ min(a_i, 2) + Σ min(b_i, 2)), et les mécanismes hors de ce cadre.
