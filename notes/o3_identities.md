@@ -94,3 +94,27 @@ Variante cubique écartée : (X+Y)³ = (X−Y)³ + 6X²Y + 2Y³ demande X 3-puis
 
 Leçon : dans toutes ces constructions, le terme croisé force les variables à être 5-puissantes, et la
 condition restante est de type abc. Aucune ne donne de famille infinie.
+
+## Cas s = 0, K = 4 : fermé (20/11/2026, preuve assistée par ordinateur)
+Quatre termes portant chacun exactement une racine non libre : T_i = λ_i t^(a_i) (t − ρ_i)^(e_i), de degré homogène d,
+b_i = d − a_i − e_i, e_i >= 5, 0 et l'infini libres.
+- **Borne de degré (wronskien).** Trois des termes sont toujours linéairement indépendants : une relation à trois termes
+  forcerait, par Mason–Stothers, les trois à partager leur racine non libre, et le quatrième serait alors dans leur
+  span de dimension 2, ce qui donne une relation à trois termes interdite. W = W(T_i, T_j, T_k) est le même, au signe près, pour tout
+  choix de trois termes, de degré homogène 3d − 6, et en chaque point P on peut choisir les trois termes pour exclure un terme
+  qui ne s'annule pas en P : ord_P W >= Σ_i max(0, μ_iP − 2). En sommant, et puisque Σ_i (a_i + e_i + b_i) = 4d :
+  **d <= 2 + Σ min(a_i, 2) + Σ min(b_i, 2) <= 14.** (La même borne vaut pour s = 1, K = 4.)
+- **Calcul** (`search/identities_k4.py`, Singular via passagemath) : pour chaque motif (a_i, e_i) admis par la borne et
+  chaque façon dont les termes partagent leurs racines (les 14 partitions des quatre termes en au moins deux blocs), idéal des
+  d + 1 équations en (ρ_2, ρ_3, ρ_4, λ_2, λ_3, λ_4), ρ_1 = 1, saturé par les racines non nulles, deux à deux distinctes,
+  et λ_2 λ_3 λ_4. 881 468 systèmes (`results/k4/`). Calibrage : avec le seuil 2 au lieu de 5, le programme trouve bien des relations.
+- **Résultat.** 44 systèmes non exclus. 43 sont triviaux : deux termes identiques (même motif, même racine) qui
+  s'annulent (λ_2 = −1, λ_3 = −λ_4), donc une sous-somme nulle. Le dernier est une vraie identité, en degré 6 :
+
+      5√5 · Y [(X + Y)^5 + (X − Y)^5] = X [(X + √5 Y)^5 − (X − √5 Y)^5]   (les deux valent 10√5 (X^5 Y + 10 X^3 Y^3 + 5 X Y^5))
+
+  Elle n'est pas définie sur Q, et aucun changement de variable (même sur Q(√5), en échangeant les rôles des racines
+  libres) ne la rend rationnelle : les quatre racines non libres 1, −1, √5, −√5 ont un birapport irrationnel, alors que
+  des racines rationnelles auraient un birapport rationnel, et le birapport est invariant par homographie.
+- **Conséquence : aucune identité de Price à quatre termes avec s = 0 et K = 4 n'existe sur Q pour r = 5.**
+  Restent ouverts : s = 1 avec K >= 4, s = 0 avec K >= 5 (la borne devient d <= 2K − 6 + Σ min(a_i, 2) + Σ min(b_i, 2)).

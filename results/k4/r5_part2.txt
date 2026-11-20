@@ -1,0 +1,18 @@
+R=5 d=5 part 2/4: 0 systems so far, 0 not excluded, 0s
+CANDIDATE d=6 ((0, 5), (0, 5), (1, 5), (1, 5)) (1, 1, r2, r2) [l3 + l4, l2 + 1]
+CANDIDATE d=6 ((0, 5), (0, 5), (1, 5), (1, 5)) (1, r2, r3, r4) [l3 + l4, l2 - 1, r4 - 25*l4, r3 + 25*l4]
+R=5 d=6 part 2/4: 14 systems so far, 2 not excluded, 0s
+CANDIDATE d=7 ((0, 5), (0, 5), (1, 6), (1, 6)) (1, 1, r2, r2) [l3 + l4, l2 + 1]
+R=5 d=7 part 2/4: 182 systems so far, 3 not excluded, 1s
+R=5 d=8 part 2/4: 1414 systems so far, 3 not excluded, 5s
+CANDIDATE d=9 ((0, 7), (0, 7), (3, 6), (3, 6)) (1, 1, r2, r2) [l3 + l4, l2 + 1]
+R=5 d=9 part 2/4: 5880 systems so far, 4 not excluded, 7s
+CANDIDATE d=10 ((0, 8), (0, 8), (3, 7), (3, 7)) (1, 1, r2, r2) [l3 + l4, l2 + 1]
+CANDIDATE d=10 ((0, 8), (0, 8), (5, 5), (5, 5)) (1, 1, r2, r2) [l3 + l4, l2 + 1]
+CANDIDATE d=10 ((0, 6), (0, 6), (4, 6), (4, 6)) (1, 1, r2, r2) [l3 + l4, l2 + 1]
+CANDIDATE d=10 ((0, 5), (0, 5), (4, 6), (4, 6)) (1, 1, r2, r2) [l3 + l4, l2 + 1]
+R=5 d=10 part 2/4: 19264 systems so far, 8 not excluded, 14s
+R=5 d=11 part 2/4: 46718 systems so far, 8 not excluded, 27s
+R=5 d=12 part 2/4: 97622 systems so far, 8 not excluded, 52s
+R=5 d=13 part 2/4: 161434 systems so far, 8 not excluded, 84s
+R=5 d=14 part 2/4: 221438 systems so far, 8 not excluded, 116s
